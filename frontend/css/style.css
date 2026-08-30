@@ -167,11 +167,14 @@
   main:has(#view-home.active){max-width:none;padding:0;}
 
   .hero{
-    position:relative;height:100vh;min-height:560px;
+    position:relative;height:110vh;min-height:680px;
     background:radial-gradient(ellipse at 50% 30%, #16305A 0%, var(--midnight) 65%, #060A1C 100%);
     overflow:hidden;display:flex;align-items:center;justify-content:center;
   }
-  .hero canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block;}
+  .hero canvas{
+    position:absolute;top:0;left:0;width:100%;height:100%;display:block;
+    opacity:0.95;filter:drop-shadow(0 0 45px rgba(88,198,255,0.22));
+  }
   .hero-content{position:relative;z-index:2;text-align:center;color:#fff;pointer-events:none;}
   .hero-title{
     font-family:'Newsreader',serif;font-weight:600;
