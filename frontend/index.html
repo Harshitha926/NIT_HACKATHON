@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jalamrit — Flood Risk & Civic Reporting</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <svg class="droplet" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 4 12 4 17a8 8 0 0016 0c0-5-8-15-8-15z" fill="#4FA8C9" stroke="#fff" stroke-width="1"/></svg>
+    <div class="brand-text">
+      <span class="name">Jalamrit</span>
+      <span class="tag">Sponge City Risk Detector</span>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button data-tab="home" class="active">Home</button>
+    <button data-tab="map">Risk Map</button>
+    <button data-tab="predict">Predict</button>
+    <button data-tab="report">Report an Issue</button>
+    <button data-tab="gov">Government Portal</button>
+    <button data-tab="about">Methodology</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== HOME TAB ===================== -->
+  <section id="view-home" class="view active">
+
+    <div class="hero" id="hero">
+      <canvas id="globeCanvas"></canvas>
+      <div class="hero-content">
+        <h1 class="hero-title" id="heroTitle"></h1>
+        <div class="hero-tag">Sponge City Risk Detector</div>
+        <div class="hero-sub">Satellite-based, hyperlocal urban flood risk mapping — zero hardware, validated across real city zones.</div>
+      </div>
+      <div class="scroll-cue">Scroll<div class="arrow">↓</div></div>
+      <svg class="wave-divider" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C240,90 480,0 720,35 C960,70 1200,10 1440,45 L1440,100 L0,100 Z" fill="#EAF3F6"/>
+      </svg>
+    </div>
+
+    <div class="home-section reveal">
+      <div class="home-eyebrow">The Name</div>
+      <h2>Why Jalamrit?</h2>
+      <p>जल (jal) means water. अमृत (amrit) means the nectar of life. Together, Jalamrit is water reimagined as something a city can hold, absorb, and benefit from — not something that destroys it.</p>
+      <div class="name-meaning">
+        <div class="word">जल</div><div class="plus">+</div>
+        <div class="word">अमृत</div><div class="plus">=</div>
+        <div class="word">Jalamrit</div>
+      </div>
+      <p>Our mission is simple: turn destructive urban runoff back into water a city can use — by telling every neighborhood exactly where it needs to build for it, using nothing but free satellite data.</p>
+    </div>
+
+    <div class="home-section reveal">
+      <div class="home-eyebrow">The Problem</div>
+      <h2>Indian cities are flooding more, with less warning</h2>
+      <p>Rapid, unplanned urbanization has paved over the lakes and wetlands that once absorbed monsoon rainfall. The result is frequent, severe flooding — and no existing system tells a city exactly which street needs which fix.</p>
+      <div class="problem-stats">
+        <div class="stat"><div class="n">211</div><div class="l">storm-water zones flagged citywide (BBMP, Bengaluru)</div></div>
+        <div class="stat"><div class="n">58</div><div class="l">classified as severely vulnerable to flooding</div></div>
+        <div class="stat"><div class="n">125</div><div class="l">years of rainfall data show intensity back to 1970s levels</div></div>
+        <div class="stat"><div class="n">0</div><div class="l">existing hyperlocal, sensor-free early warning systems</div></div>
+      </div>
+    </div>
+
+    <div class="home-section reveal">
+      <div class="home-eyebrow">The Solution</div>
+      <h2>Why sponge cities should be built now</h2>
+      <p>A "sponge city" absorbs rainwater where it falls — through rain gardens, permeable pavement, and groundwater recharge — instead of letting it run off into overwhelmed drains. Cities like Chennai, Mumbai, and Kochi are already planning this. Bengaluru isn't yet.</p>
+      <div class="sponge-visual">
+        <div class="sponge-card"><div class="dot"></div><h4>Absorb, don't discharge</h4><p>Rain gardens and permeable surfaces let water soak in locally, reducing runoff at the source instead of overloading drains downstream.</p></div>
+        <div class="sponge-card"><div class="dot"></div><h4>Recharge groundwater</h4><p>Recharge wells replenish the water table — turning a flood risk into a long-term water resource for the city.</p></div>
+        <div class="sponge-card"><div class="dot"></div><h4>Near-zero deployment cost</h4><p>Built entirely on free satellite and government data — any ward can replicate this without new hardware or sensors.</p></div>
+      </div>
+    </div>
+
+    <div class="team-section reveal">
+      <div class="team-inner">
+        <div class="home-eyebrow">Who We Are</div>
+        <h2>About Us</h2>
+        <p style="color:#C9D9E6;max-width:620px;">A team of four building Jalamrit — from satellite data pipelines to the interface you're using right now.</p>
+        <div class="team-grid">
+          <div class="team-card"><div class="team-avatar">1</div><h4>[Name]</h4><div class="role">[Role]</div></div>
+          <div class="team-card"><div class="team-avatar">2</div><h4>[Name]</h4><div class="role">[Role]</div></div>
+          <div class="team-card"><div class="team-avatar">3</div><h4>[Name]</h4><div class="role">[Role]</div></div>
+          <div class="team-card"><div class="team-avatar">4</div><h4>[Name]</h4><div class="role">[Role]</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-cta">
+      <button id="enterAppBtn">Explore the Platform →</button>
+    </div>
+
+  </section>
+
+  <!-- ===================== MAP TAB ===================== -->
+  <section id="view-map" class="view">
+    <div class="page-head">
+      <h1>Bellandur / HSR Layout — Flood Risk Map</h1>
+      <p>1,288 grid cells (100m × 100m), calibrated to real flood history. Click any cell for details.</p>
+    </div>
+    <div class="grid-2">
+      <div id="map"></div>
+      <div class="card">
+        <h3 style="margin-top:0;font-size:16px;">Legend</h3>
+        <div class="legend-row"><span class="legend-dot" style="background:#2E8B57"></span> Low risk</div>
+        <div class="legend-row"><span class="legend-dot" style="background:#E0A430"></span> Moderate risk</div>
+        <div class="legend-row"><span class="legend-dot" style="background:#D9743A"></span> High risk</div>
+        <div class="legend-row"><span class="legend-dot" style="background:#D64550"></span> Critical risk</div>
+        <div style="margin:16px 0;border-top:1px solid var(--line);"></div>
+        <h3 style="font-size:16px;">Zone Summary</h3>
+        <div id="statsList"></div>
+        <div style="margin:16px 0;border-top:1px solid var(--line);"></div>
+        <h3 style="font-size:16px;">Selected Cell</h3>
+        <div id="cellDetail">Click a cell on the map to see its details here.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PREDICT TAB ===================== -->
+  <section id="view-predict" class="view">
+    <div class="page-head">
+      <h1>Check Flood Risk</h1>
+      <p>Select a known locality, or use your current location to find the nearest assessed zone.</p>
+    </div>
+    <div class="card">
+      <div class="predict-controls">
+        <select id="localitySelect">
+          <option value="">Choose a locality…</option>
+        </select>
+        <button class="primary" id="predictBtn">Check Risk</button>
+        <button class="ghost" id="geoBtn">Use My Location</button>
+      </div>
+      <div id="predictResult"></div>
+    </div>
+  </section>
+
+  <!-- ===================== REPORT TAB ===================== -->
+  <section id="view-report" class="view">
+    <div class="page-head">
+      <h1>Report Waterlogging or Flooding</h1>
+      <p>Seen flooding in your area? Attach a photo and let your ward office know — reports appear on the Government Portal for review.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <form class="report-form" id="reportForm">
+          <div>
+            <label>Where is this happening?</label>
+            <select id="reportLocality" required>
+              <option value="">Select area…</option>
+              <option>ORR Corridor, Bellandur</option>
+              <option>Bellandur Lake area</option>
+              <option>HSR Layout Sector 2</option>
+              <option>Green Glen Layout</option>
+              <option>Sarjapur Road Junction</option>
+              <option>Other (describe below)</option>
+            </select>
+          </div>
+          <div>
+            <label>Describe what you're seeing</label>
+            <textarea id="reportDesc" rows="3" placeholder="e.g. Knee-deep water on the service road since this morning" required></textarea>
+          </div>
+          <div>
+            <label>Add a photo</label>
+            <div class="dropzone" id="dropzone">
+              <span id="dropzoneText">Tap to choose a photo, or drag one here</span>
+              <input type="file" id="photoInput" accept="image/*" style="display:none;">
+            </div>
+          </div>
+          <button type="submit" class="primary" style="justify-self:start;">Submit Report</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;font-size:16px;">Recent Reports (Public Feed)</h3>
+        <div class="feed" id="publicFeed"><div class="empty-msg">No reports yet — be the first.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GOVERNMENT TAB ===================== -->
+  <section id="view-gov" class="view">
+    <div class="page-head">
+      <h1>Government Portal</h1>
+      <p>Review citizen reports, verify issues, and mark zones as Red Alert for priority response.</p>
+    </div>
+    <div class="stats-bar">
+      <div class="card"><div class="num" id="statTotal">0</div><div class="lbl">Total reports</div></div>
+      <div class="card"><div class="num" id="statPending">0</div><div class="lbl">Pending review</div></div>
+      <div class="card"><div class="num" id="statRed">0</div><div class="lbl">Active red alerts</div></div>
+      <div class="card"><div class="num" id="statResolved">0</div><div class="lbl">Resolved</div></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;font-size:16px;">All Reports</h3>
+      <div class="feed" id="govFeed"><div class="empty-msg">No reports submitted yet.</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT TAB ===================== -->
+  <section id="view-about" class="view">
+    <div class="page-head">
+      <h1>About This Tool</h1>
+      <p>Methodology, data sources, and honest limitations.</p>
+    </div>
+    <div class="card about-section">
+      <h3>What this is</h3>
+      <p>Jalamrit identifies which 100m-by-100m patches of a neighborhood are genuinely prone to flooding — and recommends a specific fix (rain garden, permeable pavement, or groundwater recharge well) — using only free satellite data. No sensors, no hardware.</p>
+
+      <h3>How risk is calculated</h3>
+      <ul>
+        <li>Elevation, slope, and imperviousness pulled from Google Earth Engine (SRTM, ESA WorldCover)</li>
+        <li>Distance to the nearest mapped stormwater drain (real BBMP/KSRSAC drain network, 6,848 segments)</li>
+        <li>Flood detection via Sentinel-1 radar, cross-checked against a dry-season control to remove permanent lakes from the results</li>
+        <li>A Random Forest model trained on confirmed historical flood events, cross-validated</li>
+      </ul>
+
+      <h3>Validated against</h3>
+      <ul>
+        <li>Official BBMP zone-wise flood vulnerability lists</li>
+        <li>National Water Data Portal government rainfall station records, 1900–2025</li>
+        <li>A peer-reviewed 2026 academic study on Bellandur Ward flood risk (ETASR journal)</li>
+      </ul>
+
+      <div class="note-box">
+        <b>Honest limitations:</b> Model accuracy ranges 0.55–0.78 ROC-AUC across tested zones — meaningfully better than guessing, strongest in Bellandur. This is a static risk map, not a real-time forecast: we identify where infrastructure is needed, not when the next flood will hit. We tested Karnataka's public hourly rainfall telemetry for real-time forecasting and found genuine coverage gaps, which we report rather than paper over.
+      </div>
+
+      <h3>Citizen reporting</h3>
+      <p>Reports submitted through this tool are stored and visible to everyone using it, including the Government Portal view. This is a working demo — in a real deployment, reports would route directly to the relevant ward office's system.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
