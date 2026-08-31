@@ -253,7 +253,8 @@ function initMap() {
         bounds,
         {
           color: CAT_COLOR[d.cat],
-          weight: 0,
+          color: '#ffffff',
+          weight: 0.5,
           fillColor: CAT_COLOR[d.cat],
           fillOpacity:
             d.cat === 'L'
@@ -272,6 +273,29 @@ function initMap() {
     rect.addTo(cellLayer);
 
   });
+
+  const REC_ICON = {
+    rain_garden: '🌱',
+    permeable_pavement: '🧱',
+    recharge_well: '⛲'
+  };
+
+  const interventionLayer = L.layerGroup().addTo(map);
+
+  RISK_DATA.forEach(d => {
+    if (!REC_ICON[d.rec]) return;
+    const icon = L.divIcon({
+      className: 'intervention-marker',
+      html: `<span title="${REC_NAME[d.rec] || d.rec}">${REC_ICON[d.rec]}</span>`,
+      iconSize: [22, 22],
+      iconAnchor: [11, 11]
+    });
+    const marker = L.marker([d.lat, d.lon], { icon, interactive: true });
+    marker.on('click', () => showCellDetail(d));
+    marker.addTo(interventionLayer);
+  });
+
+  L.control.layers(null, { 'Recommended fixes': interventionLayer }, { collapsed: false, position: 'bottomright' }).addTo(map);
 
 }
 
@@ -2136,6 +2160,27 @@ function setupGlobe() {
     stars
   );
 
+  const shootingStars = [];
+  for (let i = 0; i < 3; i++) {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
+    const mat = new THREE.LineBasicMaterial({ color: 0xdff4ff, transparent: true, opacity: 0 });
+    const line = new THREE.Line(geo, mat);
+    scene.add(line);
+    shootingStars.push({ line, active: false, progress: 0, start: new THREE.Vector3(), end: new THREE.Vector3(), delay: 2 + Math.random() * 6 });
+  }
+  function spawnShootingStar(s) {
+    const r = 30 + Math.random() * 10;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    s.start.set(r * Math.sin(phi) * Math.cos(theta), r * Math.sin(phi) * Math.sin(theta), r * Math.cos(phi) - 16);
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 14 + Math.random() * 10;
+    s.end.copy(s.start).add(new THREE.Vector3(Math.cos(angle) * dist, Math.sin(angle) * dist * 0.5 - dist * 0.4, 0));
+    s.progress = 0;
+    s.active = true;
+  }
+
 
   /* ----------------------------------------------------------
      MOUSE INTERACTION
@@ -2331,6 +2376,28 @@ function setupGlobe() {
       0.64 +
       Math.sin(time * 0.45) *
       0.08;
+
+    shootingStars.forEach(s => {
+      if (!s.active) {
+        s.delay -= 0.016;
+        if (s.delay <= 0) spawnShootingStar(s);
+        return;
+      }
+      s.progress += 0.028;
+      if (s.progress >= 1) {
+        s.active = false;
+        s.delay = 3 + Math.random() * 9;
+        s.line.material.opacity = 0;
+        return;
+      }
+      const head = s.start.clone().lerp(s.end, s.progress);
+      const tail = s.start.clone().lerp(s.end, Math.max(0, s.progress - 0.12));
+      const pos = s.line.geometry.attributes.position.array;
+      pos[0] = tail.x; pos[1] = tail.y; pos[2] = tail.z;
+      pos[3] = head.x; pos[4] = head.y; pos[5] = head.z;
+      s.line.geometry.attributes.position.needsUpdate = true;
+      s.line.material.opacity = Math.sin(Math.min(s.progress * 4, 1) * Math.PI);
+    });
 
 
     renderer.render(

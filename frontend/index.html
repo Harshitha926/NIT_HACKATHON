@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<header class="topbar">
+<aside class="sidebar">
   <div class="brand">
     <svg class="droplet" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 4 12 4 17a8 8 0 0016 0c0-5-8-15-8-15z" fill="#4FA8C9" stroke="#fff" stroke-width="1"/></svg>
     <div class="brand-text">
@@ -21,14 +21,14 @@
     </div>
   </div>
   <nav class="tabs">
-    <button data-tab="home" class="active">Home</button>
-    <button data-tab="map">Risk Map</button>
-    <button data-tab="predict">Predict</button>
-    <button data-tab="report">Report an Issue</button>
-    <button data-tab="gov">Government Portal</button>
-    <button data-tab="about">Methodology</button>
+    <button data-tab="home" class="active"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
+    <button data-tab="map"><span class="nav-icon">🗺️</span><span class="nav-label">Risk Map</span></button>
+    <button data-tab="predict"><span class="nav-icon">🔮</span><span class="nav-label">Predict</span></button>
+    <button data-tab="report"><span class="nav-icon">📸</span><span class="nav-label">Report an Issue</span></button>
+    <button data-tab="gov"><span class="nav-icon">🏛️</span><span class="nav-label">Government Portal</span></button>
+    <button data-tab="about"><span class="nav-icon">📖</span><span class="nav-label">Methodology</span></button>
   </nav>
-</header>
+</aside>
 
 <main>
 
@@ -64,11 +64,6 @@
     <div class="word">अमृत</div>
     <div class="plus">=</div>
     <div class="word">JalAmrit</div>
-</div>
-
-<!-- JalAmrit visual -->
-<div class="jalamrit-visual">
-    <img src="images/jalamrit.png" alt="JalAmrit futuristic water concept">
 </div>
 
 <p>
@@ -113,7 +108,7 @@
         <p style="color:#C9D9E6;max-width:620px;">A team of four building Jalamrit — from satellite data pipelines to the interface you're using right now.</p>
         <div class="team-grid">
           <div class="team-card"><img src="images/harshitha.jpeg" class="team-avatar" alt="Harshitha M"><h4>Harshitha M</h4><div class="role">Developer</div></div>
-          <div class="team-card"><img src="images/SNEHA.jpeg" class="team-avatar" alt="G Snehalatha "><h4>G Snehalatha </h4><div class="role">Data analytics</div></div>
+          <div class="team-card"><img src="images/SNEHA.jpeg" class="team-avatar" alt="G Snehalatha"><h4>G Snehalatha</h4><div class="role">Data analytics</div></div>
           <div class="team-card"><img src="images/jyothi.jpeg" class="team-avatar" alt="Jyothi K S"><h4>Jyothi K S</h4><div class="role">GIS Specialist</div></div>
           <div class="team-card"><img src="images/manya.jpeg" class="team-avatar" alt="Manya "><h4>Manya </h4><div class="role">Project Manager</div></div>
         </div>
@@ -238,20 +233,49 @@
       <h3>What this is</h3>
       <p>Jalamrit identifies which 100m-by-100m patches of a neighborhood are genuinely prone to flooding — and recommends a specific fix (rain garden, permeable pavement, or groundwater recharge well) — using only free satellite data. No sensors, no hardware.</p>
 
-      <h3>How risk is calculated</h3>
-      <ul>
-        <li>Elevation, slope, and imperviousness pulled from Google Earth Engine (SRTM, ESA WorldCover)</li>
-        <li>Distance to the nearest mapped stormwater drain (real BBMP/KSRSAC drain network, 6,848 segments)</li>
-        <li>Flood detection via Sentinel-1 radar, cross-checked against a dry-season control to remove permanent lakes from the results</li>
-        <li>A Random Forest model trained on confirmed historical flood events, cross-validated</li>
-      </ul>
+      <div class="method-gallery">
+        <div class="method-photo-card">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23edf8f5'/%3E%3Cpath d='M40 100C70 70 90 52 120 44C132 40 146 40 160 47C150 64 150 75 165 87C154 103 133 110 110 112C86 114 62 110 40 100Z' fill='%234fa8c9'/%3E%3Crect x='58' y='98' width='120' height='18' rx='8' fill='%232e8b57' opacity='0.72'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3ERain Garden%3C/text%3E%3C/svg%3E" alt="Rain Garden" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="fallback-icon" style="display:none;">🌱</span>
+        </div>
+        <div class="method-photo-card">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23f3faf7'/%3E%3Cpath d='M20 112H220' stroke='%232e8b57' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M40 90C58 70 76 58 94 60C112 62 128 82 144 80C160 78 176 58 200 62' fill='none' stroke='%2352b6a2' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M35 120C62 90 78 83 105 86C118 88 126 95 143 99C162 103 181 100 205 88' fill='none' stroke='%234fa8c9' stroke-width='5' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3EBioswale%3C/text%3E%3C/svg%3E" alt="Bioswale" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="fallback-icon" style="display:none;">🌿</span>
+        </div>
+        <div class="method-photo-card">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23eef4f7'/%3E%3Crect x='24' y='64' width='192' height='52' rx='10' fill='%23d5e8ef'/%3E%3Cpath d='M42 86H198' stroke='%23638aa9' stroke-width='4'/%3E%3Cpath d='M58 74V110M78 74V110M98 74V110M118 74V110M138 74V110M158 74V110M178 74V110' stroke='%2392b6cf' stroke-width='3' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='18' font-weight='700'%3EPermeable%3C/text%3E%3C/svg%3E" alt="Permeable Pavement" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="fallback-icon" style="display:none;">🧱</span>
+        </div>
+        <div class="method-photo-card">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23eefaf9'/%3E%3Ccircle cx='122' cy='82' r='42' fill='%235dc9f1' opacity='0.75'/%3E%3Cpath d='M97 82H147M122 57V107M102 67L142 97M142 67L102 97' stroke='%230b4f6c' stroke-width='4' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3ERecharge%3C/text%3E%3C/svg%3E" alt="Recharge Well" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="fallback-icon" style="display:none;">⛲</span>
+        </div>
+      </div>
 
-      <h3>Validated against</h3>
-      <ul>
-        <li>Official BBMP zone-wise flood vulnerability lists</li>
-        <li>National Water Data Portal government rainfall station records, 1900–2025</li>
-        <li>A peer-reviewed 2026 academic study on Bellandur Ward flood risk (ETASR journal)</li>
-      </ul>
+      <div class="accordion">
+        <div class="accordion-item open">
+          <button class="accordion-head" type="button">How risk is calculated</button>
+          <div class="accordion-body">
+            <ul>
+              <li>Elevation, slope, and imperviousness pulled from Google Earth Engine (SRTM, ESA WorldCover)</li>
+              <li>Distance to the nearest mapped stormwater drain (real BBMP/KSRSAC drain network, 6,848 segments)</li>
+              <li>Flood detection via Sentinel-1 radar, cross-checked against a dry-season control to remove permanent lakes from the results</li>
+              <li>A Random Forest model trained on confirmed historical flood events, cross-validated</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-head" type="button">Validated against</button>
+          <div class="accordion-body">
+            <ul>
+              <li>Official BBMP zone-wise flood vulnerability lists</li>
+              <li>National Water Data Portal government rainfall station records, 1900–2025</li>
+              <li>A peer-reviewed 2026 academic study on Bellandur Ward flood risk (ETASR journal)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
       <div class="note-box">
         <b>Honest limitations:</b> Model accuracy ranges 0.55–0.78 ROC-AUC across tested zones — meaningfully better than guessing, strongest in Bellandur. This is a static risk map, not a real-time forecast: we identify where infrastructure is needed, not when the next flood will hit. We tested Karnataka's public hourly rainfall telemetry for real-time forecasting and found genuine coverage gaps, which we report rather than paper over.
@@ -263,6 +287,16 @@
   </section>
 
 </main>
+
+<script>
+  document.querySelectorAll('.accordion-head').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.accordion-item');
+      if (!item) return;
+      item.classList.toggle('open');
+    });
+  });
+</script>
 
 <script src="js/app.js"></script>
 </body>
