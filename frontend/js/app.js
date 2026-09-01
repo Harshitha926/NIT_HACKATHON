@@ -1311,6 +1311,66 @@ function setupHeroTitle() {
 }
 
 
+function setupStarfield() {
+  const starfield = document.getElementById('starfield');
+  if (!starfield) return;
+
+  const starCount = 120;
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('span');
+    const size = (Math.random() * 2.8 + 1.2).toFixed(2);
+    const left = (Math.random() * 100).toFixed(2) + '%';
+    const top = (Math.random() * 100).toFixed(2) + '%';
+    const delay = (Math.random() * 7).toFixed(2) + 's';
+    const duration = (Math.random() * 4 + 3).toFixed(2) + 's';
+    const opacity = (Math.random() * 0.6 + 0.4).toFixed(2);
+
+    star.className = 'star';
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = left;
+    star.style.top = top;
+    star.style.animationDelay = delay;
+    star.style.animationDuration = duration;
+    star.style.opacity = opacity;
+    star.style.background = 'rgba(255,255,255,0.9)';
+    fragment.appendChild(star);
+  }
+
+  starfield.appendChild(fragment);
+}
+
+
+function setupBeforeAfterSlider(){
+  const slider = document.getElementById('beforeAfterSlider');
+  const afterWrap = document.getElementById('baAfterWrap');
+  const handle = document.getElementById('baHandle');
+  if(!slider || !afterWrap || !handle) return;
+
+  let dragging = false;
+
+  function setPosition(clientX){
+    const rect = slider.getBoundingClientRect();
+    let pct = ((clientX - rect.left) / rect.width) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    afterWrap.style.width = pct + '%';
+    handle.style.left = pct + '%';
+  }
+
+  slider.addEventListener('mousedown', e => { dragging = true; setPosition(e.clientX); });
+  window.addEventListener('mousemove', e => { if(dragging) setPosition(e.clientX); });
+  window.addEventListener('mouseup', () => dragging = false);
+
+  slider.addEventListener('touchstart', e => { dragging = true; setPosition(e.touches[0].clientX); });
+  window.addEventListener('touchmove', e => { if(dragging) setPosition(e.touches[0].clientX); });
+  window.addEventListener('touchend', () => dragging = false);
+
+  setPosition(slider.getBoundingClientRect().left + slider.getBoundingClientRect().width / 2);
+}
+
+
 /* ============================================================
    3D EARTH
    ============================================================ */
@@ -2473,6 +2533,8 @@ document.addEventListener(
 
     /* Hero */
     setupHeroTitle();
+    setupStarfield();
+    setupBeforeAfterSlider();
 
     setupGlobe();
 

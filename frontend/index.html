@@ -36,6 +36,7 @@
   <section id="view-home" class="view active">
 
     <div class="hero" id="hero">
+      <div class="starfield" id="starfield" aria-hidden="true"></div>
       <canvas id="globeCanvas"></canvas>
       <div class="hero-content">
         <h1 class="hero-title" id="heroTitle"></h1>
@@ -48,35 +49,24 @@
       </svg>
     </div>
 
-    <div class="home-section reveal">
+    <div class="home-section reveal intro-panel">
       <div class="home-eyebrow">The Name</div>
-      <h3>Concept behind JalAmrit</h3>
-
-<p>
-  जल (jal) means water. अमृत (amrit) means the nectar of life.
-  Together, JalAmrit is water reimagined as something a city can hold,
-  absorb, and benefit from — not something that destroys it.
-</p>
-
-<div class="name-meaning">
-    <div class="word">जल</div>
-    <div class="plus">+</div>
-    <div class="word">अमृत</div>
-    <div class="plus">=</div>
-    <div class="word">JalAmrit</div>
-</div>
-
-<p>
-    Our mission is simple: turn destructive urban runoff back into water a city
-    can use — by telling every neighborhood exactly where it needs to build for
-    it, using nothing but free satellite data.
-</p>
-
-<p>
-  Our mission is simple: turn destructive urban runoff back into water a city
-  can use — by telling every neighborhood exactly where it needs to build for
-  it, using nothing but free satellite data.
-</p>
+      <h2>Concept behind JalAmrit</h2>
+      <p>
+        जल (jal) means water. अमृत (amrit) means the nectar of life.
+        In the old story of the churning ocean, poison rose before the nectar did — and only after it was faced could life emerge. Our city's monsoon water works the same way today: destructive first, but capable of becoming a resource, if we build the right infrastructure to hold it instead of just surviving it.
+      </p>
+      <div class="name-meaning">
+        <div class="word">जल</div>
+        <div class="plus">+</div>
+        <div class="word">अमृत</div>
+        <div class="plus">=</div>
+        <div class="word">JalAmrit</div>
+      </div>
+      <p>
+        Our mission is simple: turn destructive urban runoff back into water a city can use — by telling every neighborhood exactly where it needs to build for it, using nothing but free satellite data.
+      </p>
+    </div>
 
     <div class="home-section reveal">
       <div class="home-eyebrow">The Problem</div>
@@ -90,7 +80,7 @@
       </div>
     </div>
 
-    <div class="home-section reveal">
+    <div class="home-section reveal solution-panel">
       <div class="home-eyebrow">The Solution</div>
       <h2>Why sponge cities should be built now</h2>
       <p>A "sponge city" absorbs rainwater where it falls — through rain gardens, permeable pavement, and groundwater recharge — instead of letting it run off into overwhelmed drains. Cities like Chennai, Mumbai, and Kochi are already planning this. Bengaluru isn't yet.</p>
@@ -98,6 +88,32 @@
         <div class="sponge-card"><div class="dot"></div><h4>Absorb, don't discharge</h4><p>Rain gardens and permeable surfaces let water soak in locally, reducing runoff at the source instead of overloading drains downstream.</p></div>
         <div class="sponge-card"><div class="dot"></div><h4>Recharge groundwater</h4><p>Recharge wells replenish the water table — turning a flood risk into a long-term water resource for the city.</p></div>
         <div class="sponge-card"><div class="dot"></div><h4>Near-zero deployment cost</h4><p>Built entirely on free satellite and government data — any ward can replicate this without new hardware or sensors.</p></div>
+      </div>
+
+      <div class="city-visual">
+        <div class="city-visual-card">
+          <div class="city-grid"></div>
+          <div class="city-overlay">
+            <span class="city-chip">Bengaluru sponge-city concept</span>
+            <h3>Design for rainfall retention, recharge, and resilience.</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="before-after-wrap">
+        <p class="ba-caption">Drag the slider — see what changes when a road gets sponge-city infrastructure.</p>
+        <div class="before-after" id="beforeAfterSlider">
+          <img class="ba-img ba-before" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Bad_Roads.jpg" alt="Flooded, waterlogged road">
+          <div class="ba-after-wrap" id="baAfterWrap">
+            <img class="ba-img ba-after" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Rain_Garden_(15455930908).jpg" alt="Rain garden absorbing stormwater">
+          </div>
+          <div class="ba-handle" id="baHandle">
+            <div class="ba-handle-line"></div>
+            <div class="ba-handle-circle">↔</div>
+          </div>
+          <span class="ba-label ba-label-before">BEFORE</span>
+          <span class="ba-label ba-label-after">AFTER</span>
+        </div>
       </div>
     </div>
 
@@ -225,64 +241,97 @@
 
   <!-- ===================== ABOUT TAB ===================== -->
   <section id="view-about" class="view">
-    <div class="page-head">
+    <div class="page-head about-head">
       <h1>About This Tool</h1>
       <p>Methodology, data sources, and honest limitations.</p>
     </div>
-    <div class="card about-section">
-      <h3>What this is</h3>
-      <p>Jalamrit identifies which 100m-by-100m patches of a neighborhood are genuinely prone to flooding — and recommends a specific fix (rain garden, permeable pavement, or groundwater recharge well) — using only free satellite data. No sensors, no hardware.</p>
+    <div class="about-layout">
+      <div class="about-content-col">
+        <div class="card about-section" id="toc-what">
+          <h3>What this is</h3>
+          <p>Jalamrit identifies which 100m-by-100m patches of a neighborhood are genuinely prone to flooding — and recommends a specific fix (rain garden, permeable pavement, or groundwater recharge well) — using only free satellite data. No sensors, no hardware.</p>
+        </div>
 
-      <div class="method-gallery">
-        <div class="method-photo-card">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23edf8f5'/%3E%3Cpath d='M40 100C70 70 90 52 120 44C132 40 146 40 160 47C150 64 150 75 165 87C154 103 133 110 110 112C86 114 62 110 40 100Z' fill='%234fa8c9'/%3E%3Crect x='58' y='98' width='120' height='18' rx='8' fill='%232e8b57' opacity='0.72'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3ERain Garden%3C/text%3E%3C/svg%3E" alt="Rain Garden" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <span class="fallback-icon" style="display:none;">🌱</span>
-        </div>
-        <div class="method-photo-card">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23f3faf7'/%3E%3Cpath d='M20 112H220' stroke='%232e8b57' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M40 90C58 70 76 58 94 60C112 62 128 82 144 80C160 78 176 58 200 62' fill='none' stroke='%2352b6a2' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M35 120C62 90 78 83 105 86C118 88 126 95 143 99C162 103 181 100 205 88' fill='none' stroke='%234fa8c9' stroke-width='5' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3EBioswale%3C/text%3E%3C/svg%3E" alt="Bioswale" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <span class="fallback-icon" style="display:none;">🌿</span>
-        </div>
-        <div class="method-photo-card">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23eef4f7'/%3E%3Crect x='24' y='64' width='192' height='52' rx='10' fill='%23d5e8ef'/%3E%3Cpath d='M42 86H198' stroke='%23638aa9' stroke-width='4'/%3E%3Cpath d='M58 74V110M78 74V110M98 74V110M118 74V110M138 74V110M158 74V110M178 74V110' stroke='%2392b6cf' stroke-width='3' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='18' font-weight='700'%3EPermeable%3C/text%3E%3C/svg%3E" alt="Permeable Pavement" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <span class="fallback-icon" style="display:none;">🧱</span>
-        </div>
-        <div class="method-photo-card">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23eefaf9'/%3E%3Ccircle cx='122' cy='82' r='42' fill='%235dc9f1' opacity='0.75'/%3E%3Cpath d='M97 82H147M122 57V107M102 67L142 97M142 67L102 97' stroke='%230b4f6c' stroke-width='4' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3ERecharge%3C/text%3E%3C/svg%3E" alt="Recharge Well" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <span class="fallback-icon" style="display:none;">⛲</span>
-        </div>
-      </div>
-
-      <div class="accordion">
-        <div class="accordion-item open">
-          <button class="accordion-head" type="button">How risk is calculated</button>
-          <div class="accordion-body">
-            <ul>
-              <li>Elevation, slope, and imperviousness pulled from Google Earth Engine (SRTM, ESA WorldCover)</li>
-              <li>Distance to the nearest mapped stormwater drain (real BBMP/KSRSAC drain network, 6,848 segments)</li>
-              <li>Flood detection via Sentinel-1 radar, cross-checked against a dry-season control to remove permanent lakes from the results</li>
-              <li>A Random Forest model trained on confirmed historical flood events, cross-validated</li>
-            </ul>
+        <div class="card about-section" id="toc-interventions">
+          <div class="method-gallery">
+            <div class="method-photo-card">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23edf8f5'/%3E%3Cpath d='M40 100C70 70 90 52 120 44C132 40 146 40 160 47C150 64 150 75 165 87C154 103 133 110 110 112C86 114 62 110 40 100Z' fill='%234fa8c9'/%3E%3Crect x='58' y='98' width='120' height='18' rx='8' fill='%232e8b57' opacity='0.72'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3ERain Garden%3C/text%3E%3C/svg%3E" alt="Rain Garden" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="fallback-icon" style="display:none;">🌱</span>
+            </div>
+            <div class="method-photo-card">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23f3faf7'/%3E%3Cpath d='M20 112H220' stroke='%232e8b57' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M40 90C58 70 76 58 94 60C112 62 128 82 144 80C160 78 176 58 200 62' fill='none' stroke='%2352b6a2' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M35 120C62 90 78 83 105 86C118 88 126 95 143 99C162 103 181 100 205 88' fill='none' stroke='%234fa8c9' stroke-width='5' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3EBioswale%3C/text%3E%3C/svg%3E" alt="Bioswale" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="fallback-icon" style="display:none;">🌿</span>
+            </div>
+            <div class="method-photo-card">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23eef4f7'/%3E%3Crect x='24' y='64' width='192' height='52' rx='10' fill='%23d5e8ef'/%3E%3Cpath d='M42 86H198' stroke='%23638aa9' stroke-width='4'/%3E%3Cpath d='M58 74V110M78 74V110M98 74V110M118 74V110M138 74V110M158 74V110M178 74V110' stroke='%2392b6cf' stroke-width='3' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='18' font-weight='700'%3EPermeable%3C/text%3E%3C/svg%3E" alt="Permeable Pavement" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="fallback-icon" style="display:none;">🧱</span>
+            </div>
+            <div class="method-photo-card">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160'%3E%3Crect width='240' height='160' fill='%23eefaf9'/%3E%3Ccircle cx='122' cy='82' r='42' fill='%235dc9f1' opacity='0.75'/%3E%3Cpath d='M97 82H147M122 57V107M102 67L142 97M142 67L102 97' stroke='%230b4f6c' stroke-width='4' stroke-linecap='round'/%3E%3Ctext x='120' y='142' text-anchor='middle' fill='%2312183a' font-family='Arial' font-size='20' font-weight='700'%3ERecharge%3C/text%3E%3C/svg%3E" alt="Recharge Well" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="fallback-icon" style="display:none;">⛲</span>
+            </div>
           </div>
         </div>
 
-        <div class="accordion-item">
-          <button class="accordion-head" type="button">Validated against</button>
-          <div class="accordion-body">
-            <ul>
-              <li>Official BBMP zone-wise flood vulnerability lists</li>
-              <li>National Water Data Portal government rainfall station records, 1900–2025</li>
-              <li>A peer-reviewed 2026 academic study on Bellandur Ward flood risk (ETASR journal)</li>
-            </ul>
+        <div class="card about-section" id="toc-risk">
+          <div class="accordion">
+            <div class="accordion-item open">
+              <button class="accordion-head" type="button">How risk is calculated</button>
+              <div class="accordion-body">
+                <ul>
+                  <li>Elevation, slope, and imperviousness pulled from Google Earth Engine (SRTM, ESA WorldCover)</li>
+                  <li>Distance to the nearest mapped stormwater drain (real BBMP/KSRSAC drain network, 6,848 segments)</li>
+                  <li>Flood detection via Sentinel-1 radar, cross-checked against a dry-season control to remove permanent lakes from the results</li>
+                  <li>A Random Forest model trained on confirmed historical flood events, cross-validated</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="accordion-item" id="toc-validated">
+              <button class="accordion-head" type="button">Validated against</button>
+              <div class="accordion-body">
+                <ul>
+                  <li>Official BBMP zone-wise flood vulnerability lists</li>
+                  <li>National Water Data Portal government rainfall station records, 1900–2025</li>
+                  <li>A peer-reviewed 2026 academic study on Bellandur Ward flood risk (ETASR journal)</li>
+                </ul>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div class="card about-section" id="toc-satellite">
+          <h3>What the satellite sees</h3>
+          <p>Our model uses multispectral land-cover context, historic inundation signatures, elevation gradients, and proximity to drainage systems to separate true flood-prone terrain from places that only look waterlogged in a single image.</p>
+        </div>
+
+        <div class="card about-section" id="toc-scale">
+          <h3>Not just Bengaluru</h3>
+          <p>The method is designed to generalize to other fast-growing Indian cities facing similar run-off pressures, with only local drainage and rainfall datasets swapped in.</p>
+        </div>
+
+        <div class="card about-section" id="toc-limits">
+          <div class="note-box">
+            <b>Honest limitations:</b> Model accuracy ranges 0.55–0.78 ROC-AUC across tested zones — meaningfully better than guessing, strongest in Bellandur. This is a static risk map, not a real-time forecast: we identify where infrastructure is needed, not when the next flood will hit. We tested Karnataka's public hourly rainfall telemetry for real-time forecasting and found genuine coverage gaps, which we report rather than paper over.
+          </div>
+        </div>
+
+        <div class="card about-section">
+          <h3>Citizen reporting</h3>
+          <p>Reports submitted through this tool are stored and visible to everyone using it, including the Government Portal view. This is a working demo — in a real deployment, reports would route directly to the relevant ward office's system.</p>
         </div>
       </div>
 
-      <div class="note-box">
-        <b>Honest limitations:</b> Model accuracy ranges 0.55–0.78 ROC-AUC across tested zones — meaningfully better than guessing, strongest in Bellandur. This is a static risk map, not a real-time forecast: we identify where infrastructure is needed, not when the next flood will hit. We tested Karnataka's public hourly rainfall telemetry for real-time forecasting and found genuine coverage gaps, which we report rather than paper over.
-      </div>
-
-      <h3>Citizen reporting</h3>
-      <p>Reports submitted through this tool are stored and visible to everyone using it, including the Government Portal view. This is a working demo — in a real deployment, reports would route directly to the relevant ward office's system.</p>
+      <nav class="about-toc" aria-label="On this page">
+        <span class="toc-label">On this page</span>
+        <a href="#toc-what">What this is</a>
+        <a href="#toc-interventions">The interventions</a>
+        <a href="#toc-risk">How risk is calculated</a>
+        <a href="#toc-validated">Validated against</a>
+        <a href="#toc-satellite">What the satellite sees</a>
+        <a href="#toc-scale">Not just Bengaluru</a>
+        <a href="#toc-limits">Honest limitations</a>
+      </nav>
     </div>
   </section>
 
